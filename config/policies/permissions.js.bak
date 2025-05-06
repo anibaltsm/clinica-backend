@@ -1,0 +1,53 @@
+module.exports = {
+  'auth': {
+    enabled: true,
+    config: {
+      jwt: {
+        expiresIn: '7d',
+      },
+      providers: {
+        local: {
+          enabled: true,
+        },
+      },
+    },
+  },
+  'users-permissions': {
+    enabled: true,
+    config: {
+      jwt: {
+        expiresIn: '7d',
+      },
+      jwtSecret: process.env.JWT_SECRET,
+      defaultRole: 'authenticated',
+      publicRole: 'public',
+      roles: {
+        public: {
+          permissions: {
+            'api::auth.auth': {
+              controllers: {
+                'auth': {
+                  register: { enabled: true },
+                  login: { enabled: true },
+                  me: { enabled: true },
+                },
+              },
+            },
+          },
+        },
+        authenticated: {
+          permissions: {
+            'api::auth.auth': {
+              controllers: {
+                'auth': {
+                  me: { enabled: true },
+                  changePassword: { enabled: true },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}; 
