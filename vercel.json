@@ -15,12 +15,17 @@
   "env": {
     "NODE_ENV": "production",
     "DATABASE_CLIENT": "postgres",
-    "DATABASE_HOST": "@database_host",
-    "DATABASE_PORT": "@database_port",
-    "DATABASE_NAME": "@database_name",
-    "DATABASE_USERNAME": "@database_username",
-    "DATABASE_PASSWORD": "@database_password",
-    "DATABASE_SSL": "true"
+    "DATABASE_HOST": "ep-restless-wind-a4berice-pooler.us-east-1.aws.neon.tech",
+    "DATABASE_PORT": "5432",
+    "DATABASE_NAME": "neondb",
+    "DATABASE_USERNAME": "neondb_owner",
+    "DATABASE_PASSWORD": "npg_vcPAx89ZYNlr",
+    "DATABASE_SSL": "true",
+    "APP_KEYS": "drIfpUVlyhYWSYipuoDeIQ==,/+WfQL4kg+mA0KQQkRZJ1g==,/woUR9h7pT+OeOO5MoFTFA==,osUuS3jmrL/aXDHoU4gG2w==",
+    "API_TOKEN_SALT": "nqUqBFR2tEMz1h4nW4+d3g==",
+    "ADMIN_JWT_SECRET": "mwqmfOUyUWQqRn1zvi8Hmg==",
+    "TRANSFER_TOKEN_SALT": "RcRrMp2aQZwYpOepaF8XcQ==",
+    "JWT_SECRET": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRia25weXZoZHJwdXlhYXRseWRpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Njk1MjksImV4cCI6MjA2MjE0NTUyOX0.AYjoTE5Dxsd2My9Vf3vBuxO3j5JIw0-ZIbU4iiiauf0"
   },
   "build": {
     "env": {
