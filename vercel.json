@@ -1,17 +1,8 @@
 {
   "version": 2,
-  "public": true,
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/node",
-      "config": {
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist"
-      }
-    },
-    {
-      "src": "api/*.js",
       "use": "@vercel/node"
     }
   ],
@@ -21,15 +12,19 @@
       "dest": "/api/healthcheck.js",
       "headers": {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
         "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
       }
     },
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/api/index.js"
     }
   ],
+  "public": true,
+  "github": {
+    "silent": true
+  },
   "env": {
     "NODE_ENV": "production",
     "DATABASE_CLIENT": "postgres",
