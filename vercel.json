@@ -16,6 +16,10 @@
       "dest": "/public/healthcheck.json"
     },
     {
+      "src": "/status",
+      "dest": "/public/status.html"
+    },
+    {
       "src": "/api/healthcheck",
       "dest": "/api/healthcheck.js",
       "methods": ["GET", "OPTIONS"],

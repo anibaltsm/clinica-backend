@@ -75,44 +75,42 @@
         // Verificar automáticamente al cargar la página
         window.addEventListener('load', checkApiStatus);
         
-        function checkApiStatus() {
+        async function checkApiStatus() {
             const statusContainer = document.getElementById('statusContainer');
             const responseContainer = document.getElementById('responseContainer');
             
             statusContainer.style.display = 'none';
             responseContainer.innerHTML = 'Consultando el estado del API...';
             
-            // Obtener la URL base actual
-            const baseUrl = window.location.origin;
-            
-            // Realizar la solicitud al endpoint de healthcheck
-            fetch(`${baseUrl}/healthcheck`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Error HTTP: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Mostrar la respuesta completa
-                    responseContainer.innerHTML = JSON.stringify(data, null, 2);
-                    
-                    // Mostrar estado
-                    statusContainer.innerHTML = `
-                        <strong>Estado:</strong> ${data.status === 'ok' ? 'Funcionando correctamente' : 'Problema detectado'}<br>
-                        <strong>Mensaje:</strong> ${data.message}<br>
-                        <strong>Timestamp:</strong> ${new Date(data.timestamp).toLocaleString()}<br>
-                        <strong>Entorno:</strong> ${data.environment}
-                    `;
-                    statusContainer.className = data.status === 'ok' ? 'status success' : 'status error';
-                    statusContainer.style.display = 'block';
-                })
-                .catch(error => {
-                    statusContainer.innerHTML = `<strong>Error al verificar el API:</strong> ${error.message}`;
-                    statusContainer.className = 'status error';
-                    statusContainer.style.display = 'block';
-                    responseContainer.innerHTML = `Error: ${error.message}`;
-                });
+            try {
+                // Realizar la solicitud directamente a la ruta /healthcheck
+                const response = await fetch('/healthcheck');
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Mostrar la respuesta completa
+                responseContainer.innerHTML = JSON.stringify(data, null, 2);
+                
+                // Mostrar estado
+                statusContainer.innerHTML = `
+                    <strong>Estado:</strong> ${data.status === 'ok' ? 'Funcionando correctamente' : 'Problema detectado'}<br>
+                    <strong>Mensaje:</strong> ${data.message}<br>
+                    <strong>Timestamp:</strong> ${new Date(data.timestamp).toLocaleString()}<br>
+                    <strong>Entorno:</strong> ${data.environment || 'No especificado'}
+                `;
+                statusContainer.className = data.status === 'ok' ? 'status success' : 'status error';
+                statusContainer.style.display = 'block';
+            } catch (error) {
+                statusContainer.innerHTML = `<strong>Error al verificar el API:</strong> ${error.message}`;
+                statusContainer.className = 'status error';
+                statusContainer.style.display = 'block';
+                responseContainer.innerHTML = `Error: ${error.message}`;
+                console.error('Error:', error);
+            }
         }
     </script>
 </body>
