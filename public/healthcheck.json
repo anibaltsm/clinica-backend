@@ -1,0 +1,7 @@
+{
+  "status": "ok",
+  "message": "API is up and running",
+  "timestamp": "2025-05-13T21:30:00.000Z",
+  "environment": "production",
+  "deployment": "Vercel"
+} 
