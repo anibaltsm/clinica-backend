@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/*.js",
+      "src": "api/**/*.js",
       "use": "@vercel/node"
     },
     {
@@ -12,6 +12,10 @@
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/api/$1.js"
+    },
+    {
       "src": "/healthcheck",
       "dest": "/public/healthcheck.json"
     },
@@ -20,38 +24,11 @@
       "dest": "/public/status.html"
     },
     {
-      "src": "/api/healthcheck",
-      "dest": "/api/healthcheck.js",
-      "methods": ["GET", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type"
-      },
-      "check": false,
-      "continue": true
-    },
-    {
-      "src": "/api/auth/(.*)",
-      "dest": "/api/auth/$1.js",
-      "methods": ["GET", "POST", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization"
-      },
-      "check": false,
-      "continue": true
-    },
-    {
       "src": "/(.*)",
       "dest": "/api/index.js"
     }
   ],
   "public": true,
-  "github": {
-    "silent": true
-  },
   "env": {
     "NODE_ENV": "production",
     "DATABASE_CLIENT": "postgres",
@@ -66,10 +43,5 @@
     "ADMIN_JWT_SECRET": "mwqmfOUyUWQqRn1zvi8Hmg==",
     "TRANSFER_TOKEN_SALT": "RcRrMp2aQZwYpOepaF8XcQ==",
     "JWT_SECRET": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRia25weXZoZHJwdXlhYXRseWRpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Njk1MjksImV4cCI6MjA2MjE0NTUyOX0.AYjoTE5Dxsd2My9Vf3vBuxO3j5JIw0-ZIbU4iiiauf0"
-  },
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
   }
 } 
