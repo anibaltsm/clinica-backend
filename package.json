@@ -13,14 +13,19 @@
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry",
-    "vercel-build": "strapi build"
+    "vercel-build": "strapi build",
+    "db:migrate": "node scripts/run-migrations.js",
+    "auth:test": "node test/auth-test.js"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.12.6",
     "@strapi/plugin-users-permissions": "5.12.6",
     "@strapi/provider-email-nodemailer": "^5.12.6",
     "@strapi/strapi": "5.12.6",
+    "bcrypt": "^6.0.0",
     "better-sqlite3": "11.3.0",
+    "dotenv": "^16.5.0",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.15.6",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
